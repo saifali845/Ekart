@@ -56,7 +56,7 @@ jobs:
 
       # Use kubelogin to configure your kubeconfig for Azure auth
       - name: Set up kubelogin for non-interactive login
-        uses: azure/use-kubelogin@v1
+        uses: azure/use-kubelogin@v2
         with:
           kubelogin-version: 'v0.0.25'
 
