@@ -1,19 +1,11 @@
-# Build stage
-FROM maven:3.9-eclipse-temurin-8 AS builder
-
-WORKDIR /app
-
-COPY . .
-
-RUN mvn clean package -DskipTests
-
-# Runtime stage
-FROM eclipse-temurin:8-jre
-
-WORKDIR /usr/src/app
-
-COPY --from=builder /app/target/*.jar app.jar
+FROM openjdk:8u151-jdk-alpine3.7
 
 EXPOSE 8070
 
-ENTRYPOINT ["java","-jar","app.jar"]
+ENV APP_HOME /usr/src/app
+
+COPY target/shopping-cart-0.0.1-SNAPSHOT.jar $APP_HOME/app.jar
+
+WORKDIR $APP_HOME
+
+ENTRYPOINT exec java -jar app.jar
