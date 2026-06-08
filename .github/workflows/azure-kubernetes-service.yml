@@ -10,7 +10,7 @@ env:
   CONTAINER_NAME: "boardgame-reg"
   RESOURCE_GROUP: "sample-rg-demo"
   CLUSTER_NAME: "sample_aks_demo_cluster001"
-  DEPLOYMENT_MANIFEST_PATH: "./deployment-service.yaml"
+  DEPLOYMENT_MANIFEST_PATH: "./deploymentservice.yaml"
 
 jobs:
   buildImage:
@@ -33,7 +33,7 @@ jobs:
       # Builds and pushes an image up to your Azure Container Registry
       - name: Build and push image to ACR
         run: |
-          az acr build --platform linux/arm64 --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1 --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} docker/Dockerfile
+          az acr build --platform linux/arm64 --image ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:v1 --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.RESOURCE_GROUP }} docker
 
   deploy:
     permissions:
